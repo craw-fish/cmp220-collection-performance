@@ -10,8 +10,8 @@ rng = np.random.default_rng(seed=82)
 class collectionTest(object):
     tests = []
     
-    def __init__(self, power, collection, rt_populate):
-        self.power = power
+    def __init__(self, length, collection, rt_populate):
+        self.length = length
         self.type = type(collection).__name__
         self.collection = collection
         self.runtimes = {
@@ -22,9 +22,7 @@ class collectionTest(object):
 
 # subclasses for each collection type
 class arrayTest(collectionTest):
-    def __init__(self, power):
-        length = 10**power
-        
+    def __init__(self, length):        
         start = timeit.default_timer()
         a = array('i', [0] * length)
         for i in range(length):
@@ -33,12 +31,10 @@ class arrayTest(collectionTest):
         
         rt_populate = end - start
         
-        super().__init__(power, a, rt_populate)
+        super().__init__(length, a, rt_populate)
 
 class listTest(collectionTest):
-    def __init__(self, power):
-        length = 10**power
-        
+    def __init__(self, length):
         start = timeit.default_timer()
         l = [None] * length
         for i in range(length):
@@ -47,12 +43,10 @@ class listTest(collectionTest):
         
         rt_populate = end - start
         
-        super().__init__(power, l, rt_populate)
+        super().__init__(length, l, rt_populate)
         
 class dequeTest(collectionTest):
-    def __init__(self, power):
-        length = 10**power
-        
+    def __init__(self, length):
         start = timeit.default_timer()
         d = deque([], maxlen=length)
         for i in range(length):
@@ -61,11 +55,16 @@ class dequeTest(collectionTest):
         
         rt_populate = end - start
         
-        super().__init__(power, d, rt_populate)
+        super().__init__(length, d, rt_populate)
 
 
-def make_collections(power: int):
-    for i in range(1, power + 1):
-        arrayTest(i)
-        listTest(i)
-        dequeTest(i)
+def make_collections(max_length: int, scale = 10):
+    length = 10
+    while length < max_length:
+        arrayTest(length)
+        listTest(length)
+        dequeTest(length)
+        length = length*scale
+    arrayTest(max_length)
+    listTest(max_length)
+    dequeTest(max_length)

@@ -1,10 +1,9 @@
-import numpy as np
+import random
 import timeit
 from array import array
 from collections import deque
 
-# seeded random number generator
-rng = np.random.default_rng(seed=82)
+random.seed(82)
 
 # super class
 class collectionTest(object):
@@ -26,7 +25,8 @@ class arrayTest(collectionTest):
         start = timeit.default_timer()
         a = array('i', [0] * length)
         for i in range(length):
-            a[i] = rng.integers(0, length)
+            # a[i] = rng.integers(0, length)
+            a[i] = random.randint(0, length)
         end = timeit.default_timer()
         
         rt_populate = end - start
@@ -38,7 +38,8 @@ class listTest(collectionTest):
         start = timeit.default_timer()
         l = [None] * length
         for i in range(length):
-            l[i] = rng.integers(0, length)
+            # l[i] = rng.integers(0, length)
+            l[i] = random.randint(0, length)
         end = timeit.default_timer()
         
         rt_populate = end - start
@@ -50,7 +51,8 @@ class dequeTest(collectionTest):
         start = timeit.default_timer()
         d = deque([], maxlen=length)
         for i in range(length):
-            d.append(rng.integers(0, length))
+            # d.append(rng.integers(0, length))
+            d.append(random.randint(0, length))
         end = timeit.default_timer()
         
         rt_populate = end - start

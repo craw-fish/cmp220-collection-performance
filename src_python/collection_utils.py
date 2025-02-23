@@ -49,7 +49,7 @@ class listTest(collectionTest):
 class dequeTest(collectionTest):
     def __init__(self, length):
         start = timeit.default_timer()
-        d = deque([], maxlen=length)
+        d = deque([])
         for i in range(length):
             # d.append(rng.integers(0, length))
             d.append(random.randint(0, length))
@@ -61,7 +61,7 @@ class dequeTest(collectionTest):
 
 
 def make_collections(max_length: int, scale = 10):
-    length = 10
+    length = scale
     while length < max_length:
         arrayTest(length)
         listTest(length)

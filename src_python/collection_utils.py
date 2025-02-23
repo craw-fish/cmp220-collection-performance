@@ -29,7 +29,7 @@ class arrayTest(collectionTest):
             a[i] = random.randint(0, length)
         end = timeit.default_timer()
         
-        rt_populate = end - start
+        rt_populate = (end - start) * 1000
         
         super().__init__(length, a, rt_populate)
 
@@ -42,7 +42,7 @@ class listTest(collectionTest):
             l[i] = random.randint(0, length)
         end = timeit.default_timer()
         
-        rt_populate = end - start
+        rt_populate = (end - start) * 1000
         
         super().__init__(length, l, rt_populate)
         
@@ -55,7 +55,7 @@ class dequeTest(collectionTest):
             d.append(random.randint(0, length))
         end = timeit.default_timer()
         
-        rt_populate = end - start
+        rt_populate = (end - start) * 1000
         
         super().__init__(length, d, rt_populate)
 

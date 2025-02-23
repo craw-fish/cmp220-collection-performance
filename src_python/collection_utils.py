@@ -2,8 +2,9 @@ import random
 import timeit
 from array import array
 from collections import deque
+from collections_demo import global_seed
 
-random.seed(82)
+random.seed(global_seed)
 
 # super class
 class collectionTest(object):

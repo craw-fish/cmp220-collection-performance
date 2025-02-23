@@ -1,6 +1,7 @@
 import pandas as pd
 import timeit
 import importlib
+global_seed = 82
 import collection_utils
 import benchmarks
 importlib.reload(collection_utils)

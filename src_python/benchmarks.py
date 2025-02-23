@@ -5,8 +5,9 @@ import importlib
 import collection_utils
 importlib.reload(collection_utils)
 from collection_utils import collectionTest
+from collections_demo import global_seed
 
-random.seed(82)
+random.seed(global_seed)
 
 def insert_items(test):
     # deep copy (don't update original collection)

@@ -1,4 +1,5 @@
 import pandas as pd
+import timeit
 import importlib
 import collection_utils
 import benchmarks
@@ -7,9 +8,12 @@ importlib.reload(benchmarks)
 from collection_utils import make_collections, collectionTest
 from benchmarks import insert_items
 
+total_start = timeit.default_timer()
+
 # perform benchmarks multiple times, compile results into list of df's
+n_trials = 3
 all_results = []
-for i in range(3):
+for i in range(n_trials):
     results_i = pd.DataFrame(columns=['length', 'benchmark', 'array', 'list', 'deque'])
     # multi-index: benchmark outside, length inside (for each benchmark, show results of each length)
     results_i.set_index(['benchmark', 'length'], inplace=True)
@@ -32,4 +36,8 @@ for i in range(3):
 
 # average of all generated dataframes
 avg_results = pd.concat(all_results).groupby(level=['benchmark', 'length'], sort=False).mean()
-avg_results
+print(avg_results)
+
+total_end = timeit.default_timer()
+print(f"\nRuntimes averaged across {n_trials} trial(s)."
+      f"\nTotal runtime: {total_end - total_start:.3f}s ({1000 * (total_end - total_start):.0f}ms)")

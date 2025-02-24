@@ -26,7 +26,6 @@ class arrayTest(collectionTest):
         start = timeit.default_timer()
         a = array('i', [0] * length)
         for i in range(length):
-            # a[i] = rng.integers(0, length)
             a[i] = random.randint(0, length)
         end = timeit.default_timer()
         
@@ -39,7 +38,6 @@ class listTest(collectionTest):
         start = timeit.default_timer()
         l = [None] * length
         for i in range(length):
-            # l[i] = rng.integers(0, length)
             l[i] = random.randint(0, length)
         end = timeit.default_timer()
         
@@ -52,7 +50,6 @@ class dequeTest(collectionTest):
         start = timeit.default_timer()
         d = deque([])
         for i in range(length):
-            # d.append(rng.integers(0, length))
             d.append(random.randint(0, length))
         end = timeit.default_timer()
         

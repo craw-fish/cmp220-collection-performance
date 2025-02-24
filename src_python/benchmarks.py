@@ -13,6 +13,15 @@ def sort_items(test):
     end = timeit.default_timer()
     test.runtimes['sort'] = (end - start) * 1000
     
+def filter_items(test):
+    collection = copy.deepcopy(test.collection)
+    
+    start = timeit.default_timer()
+    # filter for multiples of 10
+    filter(lambda x: x % 10 == 0, collection)
+    end = timeit.default_timer()
+    test.runtimes['filter'] = (end - start) * 1000
+    
 def insert_item(test):
     collection = copy.deepcopy(test.collection)
     item = random.randint(0, test.length)

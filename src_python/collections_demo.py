@@ -5,10 +5,13 @@ import importlib
 global_seed = 82
 import collection_utils
 import benchmarks
+import graph_results
 importlib.reload(collection_utils)
 importlib.reload(benchmarks)
+importlib.reload(graph_results)
 from collection_utils import make_collections, collectionTest
 from benchmarks import sort_items, filter_items, insert_item
+from graph_results import graph_results
 
 total_start = timeit.default_timer()
 
@@ -45,3 +48,5 @@ print(avg_results)
 total_end = timeit.default_timer()
 print(f"\nRuntimes averaged across {n_trials} trial(s)."
       f"\nTotal runtime: {total_end - total_start:.3f}s ({1000 * (total_end - total_start):.0f}ms)")
+
+graph_results(avg_results)

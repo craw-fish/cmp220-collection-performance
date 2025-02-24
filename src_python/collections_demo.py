@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 import timeit
 import importlib
@@ -15,9 +16,9 @@ total_start = timeit.default_timer()
 n_trials = 3
 all_results = []
 for i in range(n_trials):
-    results_i = pd.DataFrame(columns=['length', 'benchmark', 'array', 'list', 'deque'])
+    results_i = pd.DataFrame(columns=['benchmark', 'length_log', 'array', 'list', 'deque'])
     # multi-index: benchmark outside, length inside (for each benchmark, show results of each length)
-    results_i.set_index(['benchmark', 'length'], inplace=True)
+    results_i.set_index(['benchmark', 'length_log'], inplace=True)
     
     # instantiate collections; also records 'populate' runtime
     make_collections(max_length=10**6, scale=10)
@@ -29,7 +30,7 @@ for i in range(n_trials):
         insert_item(test)
         # add runtime results to df
         for benchmark, runtime in test.runtimes.items():
-            results_i.loc[(benchmark, test.length), test.type] = runtime
+            results_i.loc[(benchmark, np.log10(test.length)), test.type] = runtime
     
     # empty list of collection tests
     collectionTest.tests.clear()      
@@ -38,7 +39,7 @@ for i in range(n_trials):
     all_results.append(results_i)
 
 # average of all generated dataframes
-avg_results = pd.concat(all_results).groupby(level=['benchmark', 'length'], sort=False).mean()
+avg_results = pd.concat(all_results).groupby(level=['benchmark', 'length_log'], sort=False).mean()
 print(avg_results)
 
 total_end = timeit.default_timer()

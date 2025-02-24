@@ -9,7 +9,7 @@ def sort_items(test):
     collection = copy.deepcopy(test.collection)
     
     start = timeit.default_timer()
-    collection = sorted(collection)
+    sorted(collection)
     end = timeit.default_timer()
     test.runtimes['sort'] = (end - start) * 1000
     

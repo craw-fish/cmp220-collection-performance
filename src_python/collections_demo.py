@@ -52,5 +52,14 @@ print(f"Total runtime: {total_end - total_start:.3f}s ({1000 * (total_end - tota
 
 # average of all generated dataframes
 avg_results = pd.concat(all_results).groupby(level=['benchmark', 'length_log'], sort=False).mean()
+# log runtime values
+avg_results_log = avg_results.map(np.log10)
 
-graph_results(avg_results)
+# save to excel spreadsheet
+with pd.ExcelWriter('../results/runtime.xlsx', mode='a', if_sheet_exists='replace') as writer:
+    avg_results.to_excel(writer, sheet_name='python')
+    avg_results_log.to_excel(writer, sheet_name='python_log')
+
+# graph original and log df
+graph_results(avg_results, is_log=False, save_graphs=True)
+graph_results(avg_results_log, is_log=True, save_graphs=True)

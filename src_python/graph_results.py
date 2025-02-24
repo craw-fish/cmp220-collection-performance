@@ -21,7 +21,7 @@ def graph_results(data, save_graphs=False):
     plt.show()
     
     if(save_graphs == True):
-        plt.savefig('../results/python_runtime.png')
+        g.savefig('../results/python_runtime.png', dpi=200)
 
     # LOG(RUNTIME)
     df_log = df
@@ -39,4 +39,4 @@ def graph_results(data, save_graphs=False):
     plt.show()
     
     if(save_graphs == True):
-        plt.savefig('../results/python_runtime_log.png')
+        g.savefig('../results/python_runtime_log.png', dpi=200)

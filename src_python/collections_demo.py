@@ -7,7 +7,7 @@ import benchmarks
 importlib.reload(collection_utils)
 importlib.reload(benchmarks)
 from collection_utils import make_collections, collectionTest
-from benchmarks import insert_item
+from benchmarks import sort_items, insert_item
 
 total_start = timeit.default_timer()
 
@@ -24,6 +24,7 @@ for i in range(n_trials):
 
     for test in collectionTest.tests:
         # run benchmarks
+        sort_items(test)
         insert_item(test)
         # add runtime results to df
         for benchmark, runtime in test.runtimes.items():

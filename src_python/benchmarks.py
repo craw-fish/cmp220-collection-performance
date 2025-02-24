@@ -1,16 +1,19 @@
 import random
 import copy
 import timeit
-import importlib
-import collection_utils
-importlib.reload(collection_utils)
-from collection_utils import collectionTest
 from collections_demo import global_seed
 
 random.seed(global_seed)
 
+def sort_items(test):
+    collection = copy.deepcopy(test.collection)
+    
+    start = timeit.default_timer()
+    collection = sorted(collection)
+    end = timeit.default_timer()
+    test.runtimes['sort'] = (end - start) * 1000
+    
 def insert_item(test):
-    # deep copy (don't update original collection)
     collection = copy.deepcopy(test.collection)
     item = random.randint(0, test.length)
     

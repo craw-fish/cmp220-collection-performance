@@ -9,7 +9,7 @@ from collections_demo import global_seed
 
 random.seed(global_seed)
 
-def insert_items(test):
+def insert_item(test):
     # deep copy (don't update original collection)
     collection = copy.deepcopy(test.collection)
     item = random.randint(0, test.length)

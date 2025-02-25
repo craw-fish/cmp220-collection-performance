@@ -58,13 +58,13 @@ class dequeTest(collectionTest):
         super().__init__(length, d, rt_populate)
 
 
-def make_collections(max_length: int, scale = 10):
-    length = scale
+def make_collections(max_length: int, interval_scale = 10):
+    length = interval_scale
     while length < max_length:
         arrayTest(length)
         listTest(length)
         dequeTest(length)
-        length = length*scale
+        length = length * interval_scale
     arrayTest(max_length)
     listTest(max_length)
     dequeTest(max_length)

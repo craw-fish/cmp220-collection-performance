@@ -26,7 +26,7 @@ for i in range(n_trials):
     
     # instantiate collections; also records 'populate' runtime
     print("\tPopulating collections...")
-    make_collections(max_length=10**8, scale=2)
+    make_collections(max_length=10**8, interval_scale=2)
     print("\tCollections populated.")
     
     print("\tRunning benchmarks...")

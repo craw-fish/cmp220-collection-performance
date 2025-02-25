@@ -16,7 +16,7 @@ from graph_results import graph_results
 total_start = timeit.default_timer()
 
 # perform benchmarks multiple times, compile results into list of df's
-n_trials = 3
+n_trials = 5
 all_results = []
 for i in range(n_trials):
     print(f"Running trial {i+1} of {n_trials}...")
@@ -26,7 +26,7 @@ for i in range(n_trials):
     
     # instantiate collections; also records 'populate' runtime
     print("\tPopulating collections...")
-    make_collections(max_length=10**6, scale=10)
+    make_collections(max_length=10**8, scale=2)
     print("\tCollections populated.")
     
     print("\tRunning benchmarks...")

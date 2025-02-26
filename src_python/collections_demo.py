@@ -13,10 +13,15 @@ from collection_utils import make_collections, collectionTest
 from benchmarks import sort_items, filter_items, insert_item
 from graph_results import graph_results
 
+# CONFIG
+n_trials = 3
+max_length = 10**5
+interval_scale = 2
+save_results = False
+
 total_start = timeit.default_timer()
 
 # perform benchmarks multiple times, compile results into list of df's
-n_trials = 5
 all_results = []
 for i in range(n_trials):
     print(f"Running trial {i+1} of {n_trials}...")
@@ -26,7 +31,7 @@ for i in range(n_trials):
     
     # instantiate collections; also records 'populate' runtime
     print("\tPopulating collections...")
-    make_collections(max_length=10**8, interval_scale=2)
+    make_collections(max_length, interval_scale)
     print("\tCollections populated.")
     
     print("\tRunning benchmarks...")
@@ -56,10 +61,11 @@ avg_results = pd.concat(all_results).groupby(level=['benchmark', 'length_log'], 
 avg_results_log = avg_results.map(np.log10)
 
 # save to excel spreadsheet
-with pd.ExcelWriter('../results/runtime.xlsx', mode='a', if_sheet_exists='replace') as writer:
-    avg_results.to_excel(writer, sheet_name='python')
-    avg_results_log.to_excel(writer, sheet_name='python_log')
+if(save_results):
+    with pd.ExcelWriter('../results/runtime.xlsx', mode='a', if_sheet_exists='replace') as writer:
+        avg_results.to_excel(writer, sheet_name='python')
+        avg_results_log.to_excel(writer, sheet_name='python_log')
 
 # graph original and log df
-graph_results(avg_results, is_log=False, save_graphs=True)
-graph_results(avg_results_log, is_log=True, save_graphs=True)
+graph_results(avg_results, is_log=False, save_graphs=save_results)
+graph_results(avg_results_log, is_log=True, save_graphs=save_results)

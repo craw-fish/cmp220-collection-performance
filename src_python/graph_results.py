@@ -25,5 +25,5 @@ def graph_results(data, is_log=False, save_graphs=False):
     plt.tight_layout()
     plt.show()
     
-    if(save_graphs == True):
+    if(save_graphs):
         g.savefig(f'../results/{filename}.png', dpi=200)
